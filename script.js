@@ -1,7 +1,7 @@
 
 let humanscore=0;
 let computerscore=0;
-playgame();
+
 function getComputerChoice() {
 
     let random = Math.floor(3 * (Math.random()));
@@ -13,28 +13,20 @@ function getComputerChoice() {
     else if (random == 2)
         return("scissors");
 }
-function getHumanChoice() {
 
-    let humanchoice = prompt(" ha ha ha you puny little human want to play with me !!! you are pathetic!! give me a value between ROCK PAPER or SCISSORS dundlehead");
-        humanchoice=humanchoice.toLowerCase();
-    if (humanchoice != "rock" && humanchoice != "paper" && humanchoice != "scissors") {
-        alert(" are u kidding me!!!? Do you even know englishhh fool!! go and learn english and then come to play...huh wasted my time.")
-    }
 
-else return humanchoice;
 
-}
-function playgame(){
 
-    function playround(){
-        let humanchoice=getHumanChoice();
+
+    function playround(event){
+        if (event.target.tagName !== 'BUTTON') return;
+        let humanchoice=event.target.textContent.toLowerCase();
         let computerchoice=getComputerChoice();
     
         if(humanchoice==computerchoice){
             console.log(" ha ha ha it's drawww.i am just warming up with u fool");
 
-            humanscore++;
-            computerscore++;
+          
         }
           else if(humanchoice=="paper" && computerchoice=="rock"|| humanchoice=="rock" && computerchoice=="scissors"|| humanchoice=="scissors" && computerchoice=="paper")
             {
@@ -45,15 +37,39 @@ function playgame(){
             console.log(`hahahahahaha what happened punny human ! your ${humanchoice} lost to my ${computerchoice}`);
             computerscore++;
           }
-    }
-    let n= Number(prompt(" enter howmany rounds you want to play"));
-    for(let i=0;i<n;i++){
-       
-        playround();
-    }
+          const hchoice=document.querySelector(".humchoice");
+          const cchoice=document.querySelector(".compchoice");
+              hchoice.textContent="punyhuman's pathetic choice:".toUpperCase()+humanchoice.toUpperCase();
+              cchoice.textContent="Mighty computer san's choice :".toUpperCase()+computerchoice.toUpperCase();
 
-if(humanscore==computerscore)
-    console.log(`both of us at score ${computerscore} .its only because i took u lightly!`)
-else if(humanscore>computerscore){  console.log(`computer :${computerscore}  punyhuman:${humanscore}. dont get carried outtttt i just gave u a chance to win `)}
-else{console.log(`computer:${computerscore} human:${humanscore} . did u seeee our levels!!!!! u are nothing compared to me!!`);}
+          const human=document.querySelector(".human");
+          const comp=document.querySelector(".comp");
+          human.textContent=humanscore;
+          comp.textContent=computerscore;
+          CheckGameOver()
+
+          
+    }
+    
+function CheckGameOver(){
+if(humanscore==5||computerscore==5){
+    let winner;
+    if(humanscore==5)
+         winner="PATHETIC PUNY HUMAN";
+     else winner="MIGHTY COMPUTER SAN"    
+      win=document.querySelector(".winner");
+      win.textContent="WINNER IS : "+winner;
+
+      humanscore=0;
+      computerscore=0;
+      setTimeout(() => {
+            alert("GAME OVER! Winner: " + winner);
+            location.reload(); // Refreshes the page back to factory settings
+        }, 50);
 }
+    
+}
+
+
+const button=document.querySelector(".buttons");
+  button.addEventListener("click",playround);

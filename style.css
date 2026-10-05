@@ -1,0 +1,35 @@
+button{
+    height: 100px;
+    width:100px ;
+    border-radius:50%;
+    background-color: aquamarine;
+    color: rgb(255, 0, 140);
+    font-weight: bold;
+    border: 3px solid black;
+    cursor:pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover{
+    opacity:60% ;
+}
+button:active{
+    background-color: blue;
+    opacity: 100%;
+    border-color: rgb(129, 121, 8);
+    color: aliceblue;
+    transform: scale(0.92);
+
+}
+div{
+    margin: 10px;
+    text-align: center;
+}
+body{
+    background-color: bisque;
+}
+.buttons{
+    display: flex;
+    gap:20px;
+    justify-content: center;
+}
